@@ -49,9 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const status = document.getElementById('status');
   const apiInfo = document.getElementById('apiInfo');
   const modelInfo = document.getElementById('modelInfo');
+  const languageRadios = document.querySelectorAll('input[name="language"]');
   
   // Load saved settings
-  chrome.storage.sync.get(['apiProvider', 'apiKey', 'systemPrompt', 'model'], (result) => {
+  chrome.storage.sync.get(['apiProvider', 'apiKey', 'systemPrompt', 'model', 'language'], (result) => {
     if (result.apiProvider) {
       apiProviderSelect.value = result.apiProvider;
     }
@@ -67,6 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
       systemPromptInput.value = result.systemPrompt;
     } else {
       systemPromptInput.value = 'Kamu adalah asisten yang membantu membuat balasan yang ramah dan profesional.';
+    }
+    if (result.language) {
+      const languageRadio = document.getElementById(`lang-${result.language}`);
+      if (languageRadio) {
+        languageRadio.checked = true;
+      }
     }
     
     updateProviderInfo();
@@ -94,6 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const systemPrompt = systemPromptInput.value.trim();
     const model = modelInput.value.trim();
     
+    // Get selected language
+    let selectedLanguage = 'id';
+    languageRadios.forEach(radio => {
+      if (radio.checked) {
+        selectedLanguage = radio.value;
+      }
+    });
+    
     if (!apiKey) {
       showStatus('API Key tidak boleh kosong!', 'error');
       return;
@@ -108,7 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
       apiProvider: provider,
       apiKey: apiKey,
       systemPrompt: systemPrompt,
-      model: model
+      model: model,
+      language: selectedLanguage
     }, () => {
       showStatus('✅ Pengaturan berhasil disimpan!', 'success');
     });
