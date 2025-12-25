@@ -124,6 +124,52 @@
       color: #666;
       margin-top: 4px;
     }
+
+    .language-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .language-option {
+      position: relative;
+    }
+
+    .language-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .language-label {
+      display: block;
+      padding: 10px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+      font-size: 13px;
+      font-weight: 500;
+      color: #555;
+    }
+
+    .language-option input[type="radio"]:checked + .language-label {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .language-label:hover {
+      border-color: #667eea;
+    }
+
+    .language-flag {
+      font-size: 18px;
+      margin-right: 4px;
+    }
   </style>
 </head>
 <body>
@@ -150,6 +196,36 @@
       <label>API Key:</label>
       <input type="password" id="apiKey" placeholder="Enter your API key">
       <div class="info" id="apiInfo"></div>
+    </div>
+
+    <div class="form-group">
+      <label>🌍 Bahasa Output:</label>
+      <div class="language-grid">
+        <div class="language-option">
+          <input type="radio" id="lang-id" name="language" value="id" checked>
+          <label for="lang-id" class="language-label">
+            <span class="language-flag">🇮🇩</span> Indonesia
+          </label>
+        </div>
+        <div class="language-option">
+          <input type="radio" id="lang-en" name="language" value="en">
+          <label for="lang-en" class="language-label">
+            <span class="language-flag">🇺🇸</span> English
+          </label>
+        </div>
+        <div class="language-option">
+          <input type="radio" id="lang-zh" name="language" value="zh">
+          <label for="lang-zh" class="language-label">
+            <span class="language-flag">🇨🇳</span> 中文
+          </label>
+        </div>
+        <div class="language-option">
+          <input type="radio" id="lang-ko" name="language" value="ko">
+          <label for="lang-ko" class="language-label">
+            <span class="language-flag">🇰🇷</span> 한국어
+          </label>
+        </div>
+      </div>
     </div>
     
     <div class="form-group">
