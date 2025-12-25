@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 400px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    h2 {
+      margin: 0 0 20px 0;
+      color: #333;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 16px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #555;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    
+    select, input, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+    
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+    
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+    
+    button:hover {
+      opacity: 0.9;
+    }
+    
+    button:active {
+      transform: scale(0.98);
+    }
+    
+    .status {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      display: none;
+      font-size: 13px;
+    }
+    
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+    }
+    
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+    }
+    
+    .info {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+    
+    .provider-info {
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #555;
+    }
+    
+    .model-list {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>⚙️ Auto Reply Settings</h2>
+    
+    <div class="form-group">
+      <label>AI Provider:</label>
+      <select id="apiProvider">
+        <option value="anthropic">Anthropic Claude</option>
+        <option value="openai">OpenAI</option>
+        <option value="gemini">Google Gemini</option>
+        <option value="groq">Groq</option>
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label>Model:</label>
+      <input type="text" id="model" placeholder="Model name">
+      <div class="model-list" id="modelInfo"></div>
+    </div>
+    
+    <div class="form-group">
+      <label>API Key:</label>
+      <input type="password" id="apiKey" placeholder="Enter your API key">
+      <div class="info" id="apiInfo"></div>
+    </div>
+    
+    <div class="form-group">
+      <label>System Prompt:</label>
+      <textarea id="systemPrompt" placeholder="Kamu adalah asisten yang membantu membuat balasan..."></textarea>
+    </div>
+    
+    <button id="saveBtn">💾 Simpan Pengaturan</button>
+    
+    <div id="status" class="status"></div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
